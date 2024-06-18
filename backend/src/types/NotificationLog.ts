@@ -1,8 +1,12 @@
-import { Document, ObjectId } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
+import { IUser } from './User'
+import { IMessageCategory } from './MessageCategory'
+import { INotificationType } from './NotificationType'
 
 export interface INotificationLog extends Document {
-  sent_to: ObjectId,
-  message_category: ObjectId,
-  notification_type: ObjectId,
-  message: String
+  _id: mongoose.Types.ObjectId;
+  sent_to: IUser;
+  message_category: IMessageCategory;
+  notification_type: INotificationType;
+  message: String;
 }
