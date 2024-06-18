@@ -1,17 +1,15 @@
-const path = require('path');
-import connectToDB from '../utils/database';
+import path from 'path';
 import { startStandaloneServer } from '@apollo/server/standalone';
-
-const { loadFilesSync } = require('@graphql-tools/load-files');
-const { mergeTypeDefs } = require('@graphql-tools/merge');
-const { makeExecutableSchema } = require('@graphql-tools/schema');
-import resolvers from './resolvers';
+import { loadFilesSync } from '@graphql-tools/load-files';
+import { mergeTypeDefs } from '@graphql-tools/merge';
+import { makeExecutableSchema } from '@graphql-tools/schema';
 import { ApolloServer } from '@apollo/server';
+
+import connectToDB from '../utils/database';
+import resolvers from './resolvers';
 
 const typesArray = loadFilesSync(path.join(__dirname, './GQL/*.gql'));
 const typeDefs = mergeTypeDefs(typesArray);
-
-connectToDB();
 
 const run = async () => {
   const schema = makeExecutableSchema({
@@ -28,4 +26,5 @@ const run = async () => {
   console.log(`🚀  Server ready at: ${url}`);
 }
 
+connectToDB();
 run();
