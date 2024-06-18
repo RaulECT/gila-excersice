@@ -1,9 +1,10 @@
-import mongoose from 'mongoose';
-import { IUser, IMessageCategory, INotificationType } from '../types';
+import mongoose, { Document } from 'mongoose';
+import { IUser, IMessageCategory, INotificationType, INotificationLog } from '../types';
+import { NotificationLog } from '../models'
 
 type INotificationToSend = {
   messageType: IMessageCategory | null;
-  notificationsAgent: INotificationType;
+  notificationAgent: INotificationType;
   message: String;
   user: {
     _id: mongoose.Types.ObjectId;
@@ -21,11 +22,31 @@ export const notifyUsers = async (usersToNotify: IUser[], messageCategory: IMess
       user,
       message,
       messageType: messageCategory,
-      notificationsAgent: notificationType
+      notificationAgent: notificationType
     }));
 
     return [...previousUsers, ...notifications];
   }, []);
 
-  console.log('[notificationsToSend]', notificationsToSend)
+  await sendNotifications(notificationsToSend);
 }
+
+const sendNotifications = async (notifications: INotificationToSend[]) => {
+  const logs: Promise<INotificationLog>[] = []
+
+  notifications.forEach(async ({ user, messageType, notificationAgent, message }) => {
+    const log = new NotificationLog({
+      sent_to: user._id,
+      message_category: messageType?._id,
+      notification_type: notificationAgent._id,
+      message
+    })
+    logs.push(log.save as unknown as Promise<INotificationLog>)
+
+    console.log(`Notification sent: ${message} and used ${notificationAgent.type} as notification agent`)
+  });
+
+  await Promise.all(logs)
+}
+
+
