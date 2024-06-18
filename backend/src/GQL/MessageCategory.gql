@@ -1,0 +1,8 @@
+type MessageCategory {
+  id: ID!
+  category: String!
+}
+
+type Query {
+  getAllMessageCategories: [MessageCategory]
+}

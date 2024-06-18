@@ -1,0 +1,17 @@
+#import "./NotificationType.gql"
+#import "./MessageCategory.gql"
+#import "./User.gql"
+scalar Date
+
+type NotificationLog {
+  id: ID!
+  sent_to: User!
+  message_category: MessageCategory!
+  notification_type: NotificationType!
+  created_at: Date!
+  message: String
+}
+
+type Mutation {
+  sendNotification(messageCategoryId: ID!, message: String!): Boolean
+}

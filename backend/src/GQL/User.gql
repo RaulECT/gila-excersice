@@ -1,0 +1,11 @@
+#import "./NotificationType.gql"
+#import "./MessageCategory.gql"
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  phone_number: String!
+  message_category: [MessageCategory]
+  notification_type: [NotificationType]
+}

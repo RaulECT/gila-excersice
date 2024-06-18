@@ -1,29 +1,31 @@
-import express from 'express';
-import morgan from 'morgan';
-import { graphqlHTTP } from 'express-graphql';
+const path = require('path');
 import connectToDB from '../utils/database';
-import { GQLSchema } from './schemas';
-import messageCategoryResolver from './resolvers/messageCategoryResolver';
-import notificationLogResolver from './resolvers/notificationLogResolver';
+import { startStandaloneServer } from '@apollo/server/standalone';
 
-const app = express();
-const PORT = process.env.PORT || 4000;
+const { loadFilesSync } = require('@graphql-tools/load-files');
+const { mergeTypeDefs } = require('@graphql-tools/merge');
+const { makeExecutableSchema } = require('@graphql-tools/schema');
+import resolvers from './resolvers';
+import { ApolloServer } from '@apollo/server';
+
+const typesArray = loadFilesSync(path.join(__dirname, './GQL/*.gql'));
+const typeDefs = mergeTypeDefs(typesArray);
 
 connectToDB();
 
-const resolvers = {
-  ...messageCategoryResolver,
-  ...notificationLogResolver
+const run = async () => {
+  const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers
+  });
+  
+  const server = new ApolloServer({ schema });
+  
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: 4000 },
+  });
+  
+  console.log(`🚀  Server ready at: ${url}`);
 }
 
-app.use(morgan('combined'));
-
-app.use('/graphql', graphqlHTTP({
-  schema: GQLSchema,
-  rootValue: resolvers,
-  graphiql: true
-}))
-
-app.listen(PORT, () => {
-  console.log(`Server running on PORT: ${PORT} 🚀`)
-});
+run();

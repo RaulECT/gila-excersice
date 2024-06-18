@@ -7,14 +7,3 @@ const MessageCategorySchema: Schema = new Schema({
 });
 
 export const MessageCategory = mongoose.model<IMessageCategory>('MessageCategory', MessageCategorySchema);
-
-export const messageCategoryGQLSchema = buildSchema(`
-  type MessageCategory {
-    id: ID!
-    category: String!
-  }
-  
-  type Query {
-    getAllMessageCategories: [MessageCategory]
-  }
-`);

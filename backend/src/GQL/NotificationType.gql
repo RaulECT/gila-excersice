@@ -1,0 +1,4 @@
+type NotificationType{
+  id: ID!
+  type: String
+}

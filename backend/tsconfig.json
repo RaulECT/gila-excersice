@@ -8,5 +8,6 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist"
   },
-  "include": ["src/**/*", "utils"]
+  "include": ["src/**/*", "utils"],
+  "exclude": ["GQL"]
 }
