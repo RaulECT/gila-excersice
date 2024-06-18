@@ -9,6 +9,8 @@ const fillDatabase = async () => {
 
     await fillNotificationTypes();
     await fillMessageCategories();
+    await fillUsers();
+
   } catch (error) {
     throw error;
   }
@@ -54,7 +56,6 @@ const run = async () => {
   try {
     await connectToDB();
     await fillDatabase();
-    await fillUsers();
 
     mongoose.connection.close();
     process.exit(1);
