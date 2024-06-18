@@ -4,6 +4,7 @@ import { graphqlHTTP } from 'express-graphql';
 import connectToDB from '../utils/database';
 import { GQLSchema } from './schemas';
 import messageCategoryResolver from './resolvers/messageCategoryResolver';
+import notificationLogResolver from './resolvers/notificationLogResolver';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -11,7 +12,8 @@ const PORT = process.env.PORT || 4000;
 connectToDB();
 
 const resolvers = {
-  ...messageCategoryResolver
+  ...messageCategoryResolver,
+  ...notificationLogResolver
 }
 
 app.use(morgan('combined'));
