@@ -1,0 +1,9 @@
+.header-app {
+  display: flex;
+  align-items: center;
+}
+
+.header--title {
+  color: #fff;
+  margin: 0;
+}
