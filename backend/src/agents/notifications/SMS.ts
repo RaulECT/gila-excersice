@@ -8,7 +8,7 @@ class SMS extends NotificationAgent {
   }
 
   notify(message: string, user: IUser): void {
-    console.log(`SMS notification sent:
+    console.log(`💬 SMS notification sent:
       message: ${message}
       to: ${user.name}
       at: ${new Date().toISOString()}  

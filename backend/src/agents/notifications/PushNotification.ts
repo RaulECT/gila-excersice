@@ -8,7 +8,7 @@ class PushNotification extends NotificationAgent {
   }
 
   notify(message: string, user: IUser): void {
-    console.log(`Push notification sent:
+    console.log(`📲 Push notification sent:
       message: ${message}
       to: ${user.name}
       at: ${new Date().toISOString()}  

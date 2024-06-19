@@ -8,7 +8,7 @@ class Email extends NotificationAgent {
   }
 
   notify(message: string, user: IUser): void {
-    console.log(`E-mail notification sent:
+    console.log(`📨 E-mail notification sent:
       message: ${message}
       to: ${user.name}
       at: ${new Date().toISOString()}  
