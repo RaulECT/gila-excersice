@@ -4,13 +4,13 @@ import { BUTTONS, FORM_MESSAGES } from '../../../utils/strings';
 import { CategoryType } from '../../../types'
 import './NotificationForm.style.css';
 
-type NotificationFieldType = {
+export type NotificationFieldType = {
   category?: string;
   message?: string;
 }
 
 interface NotificationFormProps {
-  onSendNotification: () => void;
+  onSendNotification: (values: NotificationFieldType) => void;
   loading: boolean;
   categories: CategoryType[] | undefined
 }
@@ -19,17 +19,24 @@ const { Item } = Form;
 const { TextArea } = Input;
 
 const NotificationForm: React.FC<NotificationFormProps> = ({ loading, categories, onSendNotification }) => {
-  
+  const [form] = Form.useForm();
+
   const getOptions = () => {
     return categories?.map(category => ({ label: category.category, value: category.id }))
   }
-  
+
+  const onSubmit = (values: NotificationFieldType) => {
+    onSendNotification(values);
+    form.resetFields();
+  }
+
   return (
     <Form
+      form={form}
       className='notification-form'
       name="notificationForm"
       layout='vertical'
-      onFinish={onSendNotification}
+      onFinish={onSubmit}
       autoComplete="off"
     >
       <Item<NotificationFieldType>
