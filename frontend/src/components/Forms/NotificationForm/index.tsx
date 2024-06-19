@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Select, Form, Input } from 'antd';
 import { BUTTONS, FORM_MESSAGES } from '../../../utils/strings';
+import { CategoryType } from '../../../types'
 import './NotificationForm.style.css';
 
 type NotificationFieldType = {
@@ -11,12 +12,18 @@ type NotificationFieldType = {
 interface NotificationFormProps {
   onSendNotification: () => void;
   loading: boolean;
+  categories: CategoryType[] | undefined
 }
 
 const { Item } = Form;
 const { TextArea } = Input;
 
-const NotificationForm: React.FC<NotificationFormProps> = ({ loading, onSendNotification }) => {
+const NotificationForm: React.FC<NotificationFormProps> = ({ loading, categories, onSendNotification }) => {
+  
+  const getOptions = () => {
+    return categories?.map(category => ({ label: category.category, value: category.id }))
+  }
+  
   return (
     <Form
       className='notification-form'
@@ -33,11 +40,7 @@ const NotificationForm: React.FC<NotificationFormProps> = ({ loading, onSendNoti
         <Select
           loading={loading}
           disabled={loading}
-          options={[
-            { label: 'Designer', value: 'designer' },
-            { label: 'Developer', value: 'developer' },
-            { label: 'Product Manager', value: 'product-manager' },
-          ]}
+          options={getOptions()}
         />
       </Item>
 

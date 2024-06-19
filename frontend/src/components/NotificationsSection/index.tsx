@@ -1,12 +1,13 @@
 import React from 'react';
 import NotificationForm from '../Forms/NotificationForm';
-import { notification } from 'antd';
+import { Alert, notification } from 'antd';
 import { NotificationType } from '../../types';
 import { NOTIFICATIONS } from '../../utils/strings';
+import useCategories from '../../hooks/useCategories';
 import './NotificationsSection.style.css'
 
 const NotificationsSection: React.FC = () => {
-  const loading = false;
+  const { loading, categories, error } = useCategories();
   const [ notificationHandler, contextHolder ] = notification.useNotification();
 
   const openNotification = ({ type, message, description }: { type: NotificationType, message: string, description: string }) => {
@@ -27,7 +28,14 @@ const NotificationsSection: React.FC = () => {
   return (
     <div className='notifications-section'>
       {contextHolder}
-      <NotificationForm loading={loading} onSendNotification={onSendNotification} />
+
+      <NotificationForm
+        loading={loading}
+        categories={categories}
+        onSendNotification={onSendNotification}
+      />
+
+      { error && <Alert type='error' message={error.message} /> }
     </div>
   );
 }
