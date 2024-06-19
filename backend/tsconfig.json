@@ -9,5 +9,5 @@
     "outDir": "./dist"
   },
   "include": ["src/**/*", "utils"],
-  "exclude": ["GQL"]
+  "exclude": ["GQL/*.gql"]
 }
