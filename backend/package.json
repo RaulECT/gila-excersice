@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/index.ts",
     "build": "tsc",
-    "fill-db": "ts-node scripts/fillDB.ts"
+    "fill-db": "ts-node scripts/fillDB.ts",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
