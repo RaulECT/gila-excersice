@@ -1,4 +1,3 @@
-import React from 'react';
 import { Layout, Typography } from 'antd';
 import Header from './components/Header';
 import NotificationsSection from './components/NotificationsSection';
