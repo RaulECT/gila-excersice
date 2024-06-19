@@ -1,6 +1,62 @@
-# Getting Started with Create React App
+# Getting Started Notification Frontend App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Front end for Notification app that allows you send notifications according categories.
+
+![Front End](../assets/frontend.png)
+
+## Requirements
+
+- NodeJS v18 or higger
+- NPM v7 or higger
+
+## First steps
+
+1. Create your `.env` file at `frontend` root directory. Take as example `.env.example` file at `frontend` root directory.
+2. Run `npm install` command to install all dependecies.
+3. Run `npm start` to run the project in browser. Open http://localhost:3000 to view it in the browser.
+
+## Folder structure
+
+```
+frontend/
+├── node_modules/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Forms/
+│   │   │   └── NotificationForm/
+│   │   │       ├── index.tsx
+│   │   │       ├── NotificationForm.style.css
+│   │   ├── Header/
+│   │   │   ├── index.tsx
+│   │   │   ├── Header.style.css
+│   │   ├── NotificationsSection/
+│   │       ├── index.tsx
+│   │       ├── NotificationsSection.style.css
+│   ├── gpl/
+│   │   ├── mutations.ts
+│   │   ├── queries.ts
+│   ├── hooks/
+│   │   ├── useCategories.ts
+│   │   ├── useNotification.ts
+│   ├── types/
+│   │   ├── index.ts
+│   ├── utils/
+│   │   ├── strings.ts
+│   ├── App.style.css
+│   ├── App.tsx
+│   ├── index.css
+│   ├── index.tsx
+│   ├── react-app-env.d.ts
+│   ├── reportWebVitals.ts
+│   ├── setupTests.ts
+├── .env.example
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── README.md
+├── tsconfig.json
+```
 
 ## Available Scripts
 
@@ -39,8 +95,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
