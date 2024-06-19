@@ -1,5 +1,5 @@
 import connectToDB from '../utils/database';
-import { NotificationType, MessageCategory, User } from '../src/schemas';
+import { NotificationType, MessageCategory, User } from '../src/models';
 import { INITIAL_MESSAGE_CATEGORIES, INITIAL_NOTIFICATION_TYPES, INITIAL_USERS } from './mocks/database';
 import mongoose from 'mongoose';
 
